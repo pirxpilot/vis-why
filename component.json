@@ -1,0 +1,16 @@
+{
+  "name": "vis-why",
+  "repo": "code42day/vis-why",
+  "description": "M Visvalingam and J D Whyatt line simplification algorithm",
+  "version": "0.0.1",
+  "keywords": [],
+  "dependencies": {},
+  "development": {
+    "code42day/binary-heap": "*"
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": [
+    "index.js"
+  ]
+}

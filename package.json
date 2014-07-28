@@ -1,0 +1,31 @@
+{
+  "name": "code42day-vis-why",
+  "version": "0.0.0",
+  "description": "M Visvalingam and J D Whyatt line simplification algorithm",
+  "main": "index.js",
+  "scripts": {
+    "test": "make check"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/code42day/vis-why.git"
+  },
+  "keywords": [
+    "line",
+    "simplification"
+  ],
+  "author": "Damian Krzeminski <pirxpilot@code42day.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/code42day/vis-why/issues"
+  },
+  "homepage": "https://github.com/code42day/vis-why",
+  "devDependencies": {
+    "jshint": "^2.5.2",
+    "mocha": "~1",
+    "should": "~4"
+  },
+  "dependencies": {
+    "code42day-binary-heap": "^1.0.0"
+  }
+}
