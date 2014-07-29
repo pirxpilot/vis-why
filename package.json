@@ -1,6 +1,6 @@
 {
   "name": "code42day-vis-why",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "M Visvalingam and J D Whyatt line simplification algorithm",
   "main": "index.js",
   "scripts": {
@@ -21,11 +21,11 @@
   },
   "homepage": "https://github.com/code42day/vis-why",
   "devDependencies": {
-    "jshint": "^2.5.2",
+    "jshint": "~2",
     "mocha": "~1",
     "should": "~4"
   },
   "dependencies": {
-    "code42day-binary-heap": "^1.0.0"
+    "code42day-binary-heap": "~1"
   }
 }
