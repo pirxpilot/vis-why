@@ -267,19 +267,41 @@ function heap(compare) {\n\
     return root;\n\
   }\n\
 \n\
+  function size() {\n\
+    return data.length - 1;\n\
+  }\n\
+\n\
   function get() {\n\
     return data.slice(1);\n\
+  }\n\
+\n\
+  function remove(item) {\n\
+    var fn, index = data.indexOf(item);\n\
+\n\
+    if (index < 0) {\n\
+      return;\n\
+    }\n\
+    if (index === data.length - 1) {\n\
+      data.pop();\n\
+      return;\n\
+    }\n\
+\n\
+    fn = smaller(data.length - 1, index) ? up : down;\n\
+    data[index] = data.pop();\n\
+    fn(data, smaller, index);\n\
   }\n\
 \n\
   return {\n\
     push: push,\n\
     pop: pop,\n\
+    size: size,\n\
+    remove: remove,\n\
     get: get\n\
   };\n\
 }//@ sourceURL=code42day-binary-heap/index.js"
 ));
 require.register("vis-why/index.js", Function("exports, require, module",
-"var heap = require('code42day-binary-heap');\n\
+"var heap = require(module.component ? 'binary-heap' : 'code42day-binary-heap');\n\
 \n\
 module.exports = simplify;\n\
 \n\
@@ -386,7 +408,8 @@ function simplify(poly, limit) {\n\
   var ts = calculate(poly);\n\
   eliminate(ts, limit - 1); // limit is in points, and we are counting triangles\n\
   return collect(ts.first);\n\
-}//@ sourceURL=vis-why/index.js"
+}\n\
+//@ sourceURL=vis-why/index.js"
 ));
 require.alias("code42day-binary-heap/index.js", "vis-why/deps/binary-heap/index.js");
 require.alias("code42day-binary-heap/index.js", "vis-why/deps/binary-heap/index.js");
