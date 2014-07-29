@@ -1,0 +1,88 @@
+<html>
+<head>
+  <title>M Visvalingam and J D Whyatt line simplification</title>
+  <style>
+    body {
+      padding: 10px;
+      font: Ubuntu, "Helvetica Neue";
+    }
+    canvas {
+      display: block;
+      background-color: f8f8ff;
+      border: solid blue thin;
+    }
+    label, input {
+      font-size: 1.2em;
+      display: inline-block;
+      margin-top: 0.2em;
+    }
+    button {
+      font-size: 1.2em;
+      margin-top: 10px;
+    }
+    input {
+      width: 3em;
+    }
+  </style>
+</head>
+<body>
+  <h1>M Visvalingam and J D Whyatt line simplification</h1>
+  <canvas width="900" height="600"></canvas>
+  <label for='limit'>Number of points in simplified polyline</label>
+  <input id="limit" type="number" min="5" value="30" step="5"></input>
+  <br>
+  <label for='current'>Number of points in original polyline</label>
+  <input id="current" readonly></input>
+  <br>
+  <button id='draw'>Try again!</button>
+  <script src="build/build.js"></script>
+  <script>
+    var simplify = require('vis-why');
+
+    function genPoly() {
+      var poly = [], point = [5, 5];
+      while (point[0] < 895 && point[1] < 695) {
+        poly.push(point);
+        point = [
+          point[0] + Math.random() * 9,
+          point[1] + (Math.random() * 10 - 3) * 1.5
+        ];
+      }
+      document.querySelector('#current').value = poly.length;
+      return poly;
+    }
+
+    function drawPoly(ctx, poly, flag) {
+      ctx.beginPath();
+      ctx.strokeStyle = flag ? 'green' : 'orange';
+      ctx.lineWidth = flag ? 1 : 5;
+      poly.forEach(function(p, i) {
+        ctx[i ? 'lineTo' : 'moveTo'](p[0], p[1]);
+      });
+      ctx.stroke();
+    }
+
+    function draw(ctx, poly, limit) {
+      ctx.clearRect(0, 0, 900, 700);
+      drawPoly(ctx, poly);
+      drawPoly(ctx, simplify(poly, limit), true);
+    }
+
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d');
+    var limit = document.querySelector('#limit');
+    var poly = genPoly();
+
+    draw(ctx, poly);
+    document.querySelector('#draw').addEventListener('click', function() {
+      poly = genPoly();
+      draw(ctx, poly, limit.value);
+    });
+
+    limit.addEventListener('change', function() {
+      draw(ctx, poly, limit.value);
+    });
+
+  </script>
+</body>
+</html>
