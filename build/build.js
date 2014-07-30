@@ -240,7 +240,7 @@ function down(heap, smaller, index) {\n\
 }\n\
 \n\
 function heap(compare) {\n\
-  var data = [null]; // 1-index\n\
+  var self, data = [null]; // 1-index\n\
 \n\
   compare = compare || function(a, b) { return a - b; };\n\
 \n\
@@ -291,13 +291,31 @@ function heap(compare) {\n\
     fn(data, smaller, index);\n\
   }\n\
 \n\
-  return {\n\
+  function rebuild(initData) {\n\
+    var i;\n\
+\n\
+    if (Array.isArray(initData)) {\n\
+      data = [null].concat(initData);\n\
+      rebuild();\n\
+    }\n\
+\n\
+    for(i = Math.floor(data.length / 2); i > 0; i--) {\n\
+      down(data, smaller, i);\n\
+    }\n\
+\n\
+    return self;\n\
+  }\n\
+\n\
+  self = {\n\
     push: push,\n\
     pop: pop,\n\
     size: size,\n\
+    rebuild: rebuild,\n\
     remove: remove,\n\
     get: get\n\
   };\n\
+\n\
+  return self;\n\
 }//@ sourceURL=code42day-binary-heap/index.js"
 ));
 require.register("vis-why/index.js", Function("exports, require, module",
@@ -332,9 +350,11 @@ function calculate(poly) {\n\
     triangle.area = area(triangle);\n\
     if (triangle.area) {\n\
       ts.list.push(triangle);\n\
-      ts.heap.push(triangle);\n\
     }\n\
   }\n\
+\n\
+  // create a heap\n\
+  ts.heap.rebuild(ts.list);\n\
 \n\
   // link list\n\
   for(i = 0; i < ts.list.length; i++) {\n\
@@ -352,12 +372,6 @@ function calculate(poly) {\n\
 function eliminate(ts, limit) {\n\
   var triangle;\n\
 \n\
-  function reheap(triangle) {\n\
-    ts.heap.remove(triangle);\n\
-    triangle.area = area(triangle);\n\
-    ts.heap.push(triangle);\n\
-  }\n\
-\n\
   while(ts.heap.size() > limit) {\n\
     triangle = ts.heap.pop();\n\
 \n\
@@ -365,15 +379,17 @@ function eliminate(ts, limit) {\n\
     if (triangle.prev) {\n\
       triangle.prev.next = triangle.next;\n\
       triangle.prev[2] = triangle[2];\n\
-      reheap(triangle.prev);\n\
+      triangle.prev.area = area(triangle.prev);\n\
     } else {\n\
       ts.first = triangle.next;\n\
     }\n\
     if (triangle.next) {\n\
       triangle.next.prev = triangle.prev;\n\
       triangle.next[0] = triangle[0];\n\
-      reheap(triangle.next);\n\
+      triangle.next.area = area(triangle.next);\n\
     }\n\
+    // some areas have changed - need to adjust the heap\n\
+    ts.heap.rebuild();\n\
   }\n\
 }\n\
 \n\
