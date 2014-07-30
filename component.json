@@ -4,10 +4,10 @@
   "description": "M Visvalingam and J D Whyatt line simplification algorithm",
   "version": "1.0.1",
   "keywords": [],
-  "dependencies": {},
-  "development": {
+  "dependencies": {
     "code42day/binary-heap": "*"
   },
+  "development": {},
   "license": "MIT",
   "main": "index.js",
   "scripts": [
