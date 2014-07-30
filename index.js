@@ -29,9 +29,11 @@ function calculate(poly) {
     triangle.area = area(triangle);
     if (triangle.area) {
       ts.list.push(triangle);
-      ts.heap.push(triangle);
     }
   }
+
+  // create a heap
+  ts.heap.rebuild(ts.list);
 
   // link list
   for(i = 0; i < ts.list.length; i++) {
@@ -49,12 +51,6 @@ function calculate(poly) {
 function eliminate(ts, limit) {
   var triangle;
 
-  function reheap(triangle) {
-    ts.heap.remove(triangle);
-    triangle.area = area(triangle);
-    ts.heap.push(triangle);
-  }
-
   while(ts.heap.size() > limit) {
     triangle = ts.heap.pop();
 
@@ -62,15 +58,17 @@ function eliminate(ts, limit) {
     if (triangle.prev) {
       triangle.prev.next = triangle.next;
       triangle.prev[2] = triangle[2];
-      reheap(triangle.prev);
+      triangle.prev.area = area(triangle.prev);
     } else {
       ts.first = triangle.next;
     }
     if (triangle.next) {
       triangle.next.prev = triangle.prev;
       triangle.next[0] = triangle[0];
-      reheap(triangle.next);
+      triangle.next.area = area(triangle.next);
     }
+    // some areas have changed - need to adjust the heap
+    ts.heap.rebuild();
   }
 }
 
