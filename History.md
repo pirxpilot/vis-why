@@ -1,4 +1,9 @@
 
+1.0.2 / 2014-07-30
+==================
+
+ * declare code42day/binary-heap dependency properly
+
 1.0.1 / 2014-07-30
 ==================
 
