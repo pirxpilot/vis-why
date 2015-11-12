@@ -1,8 +1,6 @@
-var heap = require(module.component ? 'binary-heap' : 'code42day-binary-heap');
+var heap = require('code42day-binary-heap');
 
 module.exports = simplify;
-
-
 
 function area(t) {
   return Math.abs(
