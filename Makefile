@@ -18,7 +18,7 @@ build/build.js: node_modules index.js
 	browserify --require ./index.js:$(PROJECT) --outfile $@
 
 node_modules: package.json
-	npm install
+	npm install && touch $@
 
 clean:
 	rm -fr build

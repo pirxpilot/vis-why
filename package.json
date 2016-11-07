@@ -22,8 +22,8 @@
   "homepage": "https://github.com/code42day/vis-why",
   "devDependencies": {
     "jshint": "~2",
-    "mocha": "~1",
-    "should": "~4"
+    "mocha": "~3",
+    "should": "~11"
   },
   "dependencies": {
     "code42day-binary-heap": "~1"
