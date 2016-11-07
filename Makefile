@@ -1,7 +1,7 @@
 NODE_BIN=./node_modules/.bin
 PROJECT=vis-why
 
-all: check build
+all: check compile
 
 check: lint test
 
@@ -11,7 +11,7 @@ lint: node_modules
 test: node_modules
 	$(NODE_BIN)/mocha --require should test
 
-build: build/build.js
+compile: build/build.js
 
 build/build.js: node_modules index.js
 	mkdir -p build
@@ -26,4 +26,4 @@ clean:
 distclean: clean
 	rm -fr node_modules
 
-.PHONY: clean distclean lint check all build
+.PHONY: clean distclean lint check all compile test
