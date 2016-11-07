@@ -1,4 +1,11 @@
 
+1.1.0 / 2016-11-06
+==================
+
+ * fix Makefile test target
+ * upgrade  code42day-binary-heap to 2.0.0
+ * upgrade mocha to ~3 and should to ~11
+
 1.0.3 / 2015-11-11
 ==================
 
