@@ -26,7 +26,7 @@
     "should": "~11"
   },
   "dependencies": {
-    "code42day-binary-heap": "~1"
+    "code42day-binary-heap": "^2.0.0"
   },
   "files": [
     "index.js"
