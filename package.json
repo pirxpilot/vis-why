@@ -27,5 +27,8 @@
   },
   "dependencies": {
     "code42day-binary-heap": "~1"
-  }
+  },
+  "files": [
+    "index.js"
+  ]
 }
