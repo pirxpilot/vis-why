@@ -1,4 +1,9 @@
 
+1.1.1 / 2016-11-18
+==================
+
+ * fix exception when applied to straight line case
+
 1.1.0 / 2016-11-06
 ==================
 
