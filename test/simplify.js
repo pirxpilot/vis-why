@@ -9,7 +9,7 @@ describe('simplify', function() {
   });
 
   it('should work with small limits', function() {
-    simplify([[0, 0], [1, 1], [2, 2]], 2).should.eql([[0, 0], [2, 2]]);
+    simplify([[0, 0], [1, 1.5], [2, 2]], 2).should.eql([[0, 0], [2, 2]]);
   });
 
   it('should not change anything if limit is larger than poly length', function() {
@@ -34,5 +34,20 @@ describe('simplify', function() {
 
     simplify(poly, 4).should.eql([[ 0, 0 ], [ 3, 1 ], [ 8, 5 ], [ 9, 9 ]]);
 
+  });
+
+
+  it.only('should keep the ends of the straight line', function() {
+
+    var poly = [
+      [-3, -3],
+      [0, 0],
+      [1, 1],
+      [2, 2],
+      [5, 5]
+    ];
+
+    simplify(poly, 2).should.eql([[ -3, -3 ], [ 5, 5 ]]);
+    simplify(poly, 3).should.eql([[ -3, -3 ], [ 5, 5 ]]);
   });
 });

@@ -100,5 +100,9 @@ function simplify(poly, limit) {
 
   var ts = calculate(poly);
   eliminate(ts, limit - 1); // limit is in points, and we are counting triangles
+  if (!ts.first) {
+    // empty heap - straight line with all triangles empty
+    return [poly[0], poly[poly.length - 1]];
+  }
   return collect(ts.first);
 }
