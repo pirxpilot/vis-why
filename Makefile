@@ -6,10 +6,13 @@ all: check compile
 check: lint test
 
 lint: node_modules
-	$(NODE_BIN)/jshint index.js test
+	$(NODE_BIN)/jshint index.js test benchmark
 
 test: node_modules
 	$(NODE_BIN)/mocha --require should test
+
+benchmark:
+	$(NODE_BIN)/matcha --reporter plain benchmark
 
 compile: build/build.js
 
@@ -26,4 +29,4 @@ clean:
 distclean: clean
 	rm -fr node_modules
 
-.PHONY: clean distclean lint check all compile test
+.PHONY: clean distclean lint check all compile test benchmark
