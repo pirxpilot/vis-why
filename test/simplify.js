@@ -37,7 +37,7 @@ describe('simplify', function() {
   });
 
 
-  it.only('should keep the ends of the straight line', function() {
+  it('should keep the ends of the straight line', function() {
 
     var poly = [
       [-3, -3],
