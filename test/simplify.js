@@ -50,4 +50,11 @@ describe('simplify', function() {
     simplify(poly, 2).should.eql([[ -3, -3 ], [ 5, 5 ]]);
     simplify(poly, 3).should.eql([[ -3, -3 ], [ 5, 5 ]]);
   });
+
+  it('should simplify longer polyline', function() {
+    var poly = require('./fixtures/long.json');
+    var simplified = require('./fixtures/simplified-long.json');
+
+    simplify(poly, 40).should.eql(simplified);
+  });
 });
