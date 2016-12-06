@@ -32,7 +32,7 @@ describe('simplify', function() {
       [9, 9]
     ];
 
-    simplify(poly, 4).should.eql([[ 0, 0 ], [ 3, 1 ], [ 8, 5 ], [ 9, 9 ]]);
+    simplify(poly, 4).should.eql([[ 0, 0 ], [ 3, 3 ], [ 8, 5 ], [ 9, 9 ]]);
 
   });
 
