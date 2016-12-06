@@ -17,7 +17,7 @@ function areaCompare(p, q) {
 
 function calculate(poly) {
   var i,
-    ts = { heap: heap(areaCompare) },
+    ts = { heap: heap(areaCompare, true) },
     triangle,
     trianglePrev,
     list = [];
@@ -30,7 +30,8 @@ function calculate(poly) {
       c: poly[i + 1],
       area: 0,
       next: null,
-      prev: null
+      prev: null,
+      _heapIndex: 0
     };
     triangle.area = area(triangle.a, triangle.b, triangle.c);
     if (!triangle.area) {
