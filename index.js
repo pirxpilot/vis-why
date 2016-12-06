@@ -46,8 +46,9 @@ function calculate(poly) {
       ts.first = triangle;
     }
     ts.list[triangle.self] = triangle;
-    ts.heap.push(triangle);
   }
+
+  ts.heap.rebuild(ts.list.filter(function(t) { return t; }));
 
   return ts;
 }
