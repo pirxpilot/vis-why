@@ -3,10 +3,5 @@
   "unused": true,
   "laxbreak": true,
   "browser": true,
-  "globals": {
-    "console": false,
-    "exports": false,
-    "require": false,
-    "module": false
-  }
+  "node": true
 }
