@@ -66,18 +66,19 @@ function eliminate(ts, limit) {
 
     // recalculate neighbors
     if (prevTriangle) {
+      ts.heap.remove(prevTriangle);
       prevTriangle.next = triangle.next;
       prevTriangle.area = area(ts.poly, prevTriangle.prev, prevTriangle.self, prevTriangle.next);
+      ts.heap.push(prevTriangle);
     } else {
       ts.first = nextTriangle;
     }
     if (nextTriangle) {
+      ts.heap.remove(nextTriangle);
       nextTriangle.prev = triangle.prev;
       nextTriangle.area = area(ts.poly, nextTriangle.prev, nextTriangle.self, nextTriangle.next);
+      ts.heap.push(nextTriangle);
     }
-
-    // some areas have changed - need to adjust the heap
-    ts.heap.rebuild();
   }
 }
 
