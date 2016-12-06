@@ -47,26 +47,32 @@ function calculate(poly) {
 
 
 function eliminate(ts, limit) {
-  var triangle;
+  var triangle,
+    prevTriangle,
+    nextTriangle;
 
   while(ts.heap.size() > limit) {
     triangle = ts.heap.pop();
+    prevTriangle = triangle.prev;
+    nextTriangle = triangle.next;
 
     // recalculate neighbors
-    if (triangle.prev) {
-      triangle.prev.next = triangle.next;
-      triangle.prev[2] = triangle[2];
-      triangle.prev.area = area(triangle.prev);
+    if (prevTriangle) {
+      ts.heap.remove(prevTriangle);
+      prevTriangle.next = triangle.next;
+      prevTriangle[2] = triangle[2];
+      prevTriangle.area = area(prevTriangle);
+      ts.heap.push(prevTriangle);
     } else {
       ts.first = triangle.next;
     }
-    if (triangle.next) {
-      triangle.next.prev = triangle.prev;
-      triangle.next[0] = triangle[0];
-      triangle.next.area = area(triangle.next);
+    if (nextTriangle) {
+      ts.heap.remove(nextTriangle);
+      nextTriangle.prev = triangle.prev;
+      nextTriangle[0] = triangle[0];
+      nextTriangle.area = area(nextTriangle);
+      ts.heap.push(nextTriangle);
     }
-    // some areas have changed - need to adjust the heap
-    ts.heap.rebuild();
   }
 }
 
