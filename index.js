@@ -72,13 +72,17 @@ function eliminate(ts, limit) {
 
 
 function collect(triangle) {
-  var poly = [triangle[0], triangle[1]];
+  var poly = [triangle[0]];
 
-  /* jshint -W084 */ // assignment below OK
-  while(triangle = triangle.next) {
-    poly.push(triangle[2]);
+  while(true) {
+    poly.push(triangle[1]);
+    if (!triangle.next) {
+      break;
+    }
+    triangle = triangle.next;
   }
-  /* jshint +W084 */
+
+  poly.push(triangle[2]);
 
   return poly;
 }
@@ -99,7 +103,7 @@ function simplify(poly, limit) {
   }
 
   var ts = calculate(poly);
-  eliminate(ts, limit - 1); // limit is in points, and we are counting triangles
+  eliminate(ts, limit - 2); // limit is in points, and we are counting triangles
   if (!ts.first) {
     // empty heap - straight line with all triangles empty
     return [poly[0], poly[poly.length - 1]];
