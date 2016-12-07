@@ -22,6 +22,7 @@
   "homepage": "https://github.com/code42day/vis-why",
   "devDependencies": {
     "jshint": "~2",
+    "matcha": "~0",
     "mocha": "~3",
     "should": "~11"
   },
