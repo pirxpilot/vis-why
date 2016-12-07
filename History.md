@@ -1,4 +1,11 @@
 
+1.1.2 / 2016-12-06
+==================
+
+ * properly collect triangles
+ * add basic benchmarks
+ * let all test run
+
 1.1.1 / 2016-11-18
 ==================
 
