@@ -2,10 +2,10 @@ var heap = require('code42day-binary-heap');
 
 module.exports = simplify;
 
-function area(t) {
+function area(a, b, c) {
   return Math.abs(
-    (t[0][0] - t[2][0]) * (t[1][1] - t[0][1]) -
-    (t[0][0] - t[1][0]) * (t[2][1] - t[0][1])
+    (a[0] - c[0]) * (b[1] - a[1]) -
+    (a[0] - b[0]) * (c[1] - a[1])
   );
 }
 
@@ -16,31 +16,38 @@ function areaCompare(p, q) {
 
 
 function calculate(poly) {
-  var i, triangle, ts = {
-    heap: heap(areaCompare),
-    list: []
-  };
+  var i,
+    ts = { heap: heap(areaCompare) },
+    triangle,
+    trianglePrev,
+    list = [];
 
   // calculate areas
   for (i = 1; i < poly.length - 1; i++) {
-    triangle = poly.slice(i - 1, i + 2);
-    triangle.area = area(triangle);
-    if (triangle.area) {
-      ts.list.push(triangle);
+    triangle = {
+      a: poly[i - 1],
+      b: poly[i],
+      c: poly[i + 1],
+      area: 0,
+      next: null,
+      prev: null
+    };
+    triangle.area = area(triangle.a, triangle.b, triangle.c);
+    if (!triangle.area) {
+      continue;
     }
+    if (trianglePrev) {
+      trianglePrev.next = triangle;
+      triangle.prev = trianglePrev;
+    }
+    list.push(triangle);
+    trianglePrev = triangle;
   }
+
+  ts.first = list[0];
 
   // create a heap
-  ts.heap.rebuild(ts.list);
-
-  // link list
-  for(i = 0; i < ts.list.length; i++) {
-    triangle = ts.list[i];
-    triangle.prev = ts.list[i - 1];
-    triangle.next = ts.list[i + 1];
-  }
-
-  ts.first = ts.list[0];
+  ts.heap.rebuild(list);
 
   return ts;
 }
@@ -61,8 +68,8 @@ function eliminate(ts, limit) {
     if (prevTriangle) {
       ts.heap.remove(prevTriangle);
       prevTriangle.next = triangle.next;
-      prevTriangle[2] = triangle[2];
-      prevTriangle.area = area(prevTriangle);
+      prevTriangle.c = triangle.c;
+      prevTriangle.area = area(prevTriangle.a, prevTriangle.b, prevTriangle.c);
       ts.heap.push(prevTriangle);
     } else {
       ts.first = triangle.next;
@@ -70,8 +77,8 @@ function eliminate(ts, limit) {
     if (nextTriangle) {
       ts.heap.remove(nextTriangle);
       nextTriangle.prev = triangle.prev;
-      nextTriangle[0] = triangle[0];
-      nextTriangle.area = area(nextTriangle);
+      nextTriangle.a = triangle.a;
+      nextTriangle.area = area(nextTriangle.a, nextTriangle.b, nextTriangle.c);
       ts.heap.push(nextTriangle);
     }
   }
@@ -79,17 +86,17 @@ function eliminate(ts, limit) {
 
 
 function collect(triangle) {
-  var poly = [triangle[0]];
+  var poly = [triangle.a];
 
   while(true) {
-    poly.push(triangle[1]);
+    poly.push(triangle.b);
     if (!triangle.next) {
       break;
     }
     triangle = triangle.next;
   }
 
-  poly.push(triangle[2]);
+  poly.push(triangle.c);
 
   return poly;
 }
