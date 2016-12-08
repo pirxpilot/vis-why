@@ -24,6 +24,7 @@
     "jshint": "~2",
     "matcha": "~0",
     "mocha": "~3",
+    "polyline-encoded": "^0.0.8",
     "should": "~11"
   },
   "dependencies": {
