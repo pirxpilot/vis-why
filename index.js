@@ -57,9 +57,10 @@ function calculate(poly) {
 function eliminate(ts, limit) {
   var triangle,
     prevTriangle,
-    nextTriangle;
+    nextTriangle,
+    counter = ts.heap.size() - limit;
 
-  while(ts.heap.size() > limit) {
+  while(counter--) {
     triangle = ts.heap.pop();
 
     prevTriangle = ts.list[triangle.prev];
