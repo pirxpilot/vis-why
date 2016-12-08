@@ -49,9 +49,10 @@ function calculate(poly) {
 function eliminate(ts, limit) {
   var triangle,
     prevTriangle,
-    nextTriangle;
+    nextTriangle,
+    counter = ts.heap.size() - limit;
 
-  while(ts.heap.size() > limit) {
+  while(counter--) {
     triangle = ts.heap.pop();
     prevTriangle = triangle.prev;
     nextTriangle = triangle.next;
@@ -109,10 +110,10 @@ function simplify(poly, limit) {
   }
 
   var ts = calculate(poly);
-  eliminate(ts, limit - 2); // limit is in points, and we are counting triangles
   if (!ts.first) {
     // empty heap - straight line with all triangles empty
     return [poly[0], poly[poly.length - 1]];
   }
+  eliminate(ts, limit - 2); // limit is in points, and we are counting triangles
   return collect(ts.first);
 }
