@@ -1,4 +1,9 @@
 
+1.1.3 / 2016-12-08
+==================
+
+ * make it faster - especially for polylines longer than 1k items 
+
 1.1.2 / 2016-12-06
 ==================
 
