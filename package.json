@@ -24,10 +24,11 @@
     "jshint": "~2",
     "matcha": "~0",
     "mocha": "~3",
+    "polyline-encoded": "^0.0.8",
     "should": "~11"
   },
   "dependencies": {
-    "code42day-binary-heap": "^2.0.0"
+    "code42day-binary-heap": "^2.2.0"
   },
   "files": [
     "index.js"

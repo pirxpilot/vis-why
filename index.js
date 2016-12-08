@@ -2,10 +2,10 @@ var heap = require('code42day-binary-heap');
 
 module.exports = simplify;
 
-function area(t) {
+function area(a, b, c) {
   return Math.abs(
-    (t[0][0] - t[2][0]) * (t[1][1] - t[0][1]) -
-    (t[0][0] - t[1][0]) * (t[2][1] - t[0][1])
+    (a[0] - c[0]) * (b[1] - a[1]) -
+    (a[0] - b[0]) * (c[1] - a[1])
   );
 }
 
@@ -16,73 +16,88 @@ function areaCompare(p, q) {
 
 
 function calculate(poly) {
-  var i, triangle, ts = {
-    heap: heap(areaCompare),
-    list: []
-  };
+  var i,
+    ts = { heap: heap(areaCompare, true) },
+    triangle,
+    trianglePrev,
+    list = [];
 
   // calculate areas
   for (i = 1; i < poly.length - 1; i++) {
-    triangle = poly.slice(i - 1, i + 2);
-    triangle.area = area(triangle);
-    if (triangle.area) {
-      ts.list.push(triangle);
+    triangle = {
+      a: poly[i - 1],
+      b: poly[i],
+      c: poly[i + 1],
+      area: 0,
+      next: null,
+      prev: null,
+      _heapIndex: 0
+    };
+    triangle.area = area(triangle.a, triangle.b, triangle.c);
+    if (!triangle.area) {
+      continue;
     }
+    if (trianglePrev) {
+      trianglePrev.next = triangle;
+      triangle.prev = trianglePrev;
+    }
+    list.push(triangle);
+    trianglePrev = triangle;
   }
+
+  ts.first = list[0];
 
   // create a heap
-  ts.heap.rebuild(ts.list);
-
-  // link list
-  for(i = 0; i < ts.list.length; i++) {
-    triangle = ts.list[i];
-    triangle.prev = ts.list[i - 1];
-    triangle.next = ts.list[i + 1];
-  }
-
-  ts.first = ts.list[0];
+  ts.heap.rebuild(list);
 
   return ts;
 }
 
 
 function eliminate(ts, limit) {
-  var triangle;
+  var triangle,
+    prevTriangle,
+    nextTriangle,
+    counter = ts.heap.size() - limit;
 
-  while(ts.heap.size() > limit) {
+  while(counter--) {
     triangle = ts.heap.pop();
+    prevTriangle = triangle.prev;
+    nextTriangle = triangle.next;
 
     // recalculate neighbors
-    if (triangle.prev) {
-      triangle.prev.next = triangle.next;
-      triangle.prev[2] = triangle[2];
-      triangle.prev.area = area(triangle.prev);
+    if (prevTriangle) {
+      ts.heap.remove(prevTriangle);
+      prevTriangle.next = triangle.next;
+      prevTriangle.c = triangle.c;
+      prevTriangle.area = area(prevTriangle.a, prevTriangle.b, prevTriangle.c);
+      ts.heap.push(prevTriangle);
     } else {
       ts.first = triangle.next;
     }
-    if (triangle.next) {
-      triangle.next.prev = triangle.prev;
-      triangle.next[0] = triangle[0];
-      triangle.next.area = area(triangle.next);
+    if (nextTriangle) {
+      ts.heap.remove(nextTriangle);
+      nextTriangle.prev = triangle.prev;
+      nextTriangle.a = triangle.a;
+      nextTriangle.area = area(nextTriangle.a, nextTriangle.b, nextTriangle.c);
+      ts.heap.push(nextTriangle);
     }
-    // some areas have changed - need to adjust the heap
-    ts.heap.rebuild();
   }
 }
 
 
 function collect(triangle) {
-  var poly = [triangle[0]];
+  var poly = [triangle.a];
 
   while(true) {
-    poly.push(triangle[1]);
+    poly.push(triangle.b);
     if (!triangle.next) {
       break;
     }
     triangle = triangle.next;
   }
 
-  poly.push(triangle[2]);
+  poly.push(triangle.c);
 
   return poly;
 }
@@ -103,10 +118,10 @@ function simplify(poly, limit) {
   }
 
   var ts = calculate(poly);
-  eliminate(ts, limit - 2); // limit is in points, and we are counting triangles
   if (!ts.first) {
     // empty heap - straight line with all triangles empty
     return [poly[0], poly[poly.length - 1]];
   }
+  eliminate(ts, limit - 2); // limit is in points, and we are counting triangles
   return collect(ts.first);
 }
