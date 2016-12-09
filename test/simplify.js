@@ -32,7 +32,7 @@ describe('simplify', function() {
       [9, 9]
     ];
 
-    simplify(poly, 4).should.eql([[ 0, 0 ], [ 3, 3 ], [ 8, 5 ], [ 9, 9 ]]);
+    simplify(poly, 4).should.eql([[ 0, 0 ], [ 4, 4 ], [ 8, 5 ], [ 9, 9 ]]);
 
   });
 
@@ -71,8 +71,10 @@ describe('simplify', function() {
 
   it('should simplify longer polyline', function() {
     var poly = require('./fixtures/long.json');
-    var simplified = require('./fixtures/simplified-long.json');
+    var expected = require('./fixtures/simplified-long.json');
 
-    simplify(poly, 40).should.eql(simplified);
+    var actual = simplify(poly, 40);
+    actual.should.have.length(40);
+    actual.should.eql(expected);
   });
 });

@@ -1,4 +1,4 @@
-var heap = require('code42day-binary-heap');
+var heap = require('code42day-pairing-heap');
 
 module.exports = simplify;
 
@@ -10,47 +10,39 @@ function area(a, b, c) {
 }
 
 
-function areaCompare(p, q) {
-  return p.area - q.area;
-}
-
-
 function calculate(poly) {
   var i,
-    ts = { heap: heap(areaCompare, true) },
+    ts = { heap: heap() },
     triangle,
     trianglePrev,
-    a = poly[0], b = poly[1], c,
-    list = [];
+    a = poly[0], b = poly[1], c;
 
   // calculate areas
   for (i = 2; i < poly.length; i++) {
     c = poly[i];
     triangle = {
+      _id: i,
       a: a,
       b: b,
       c: c,
-      area: area(a, b, c),
       next: null,
       prev: trianglePrev,
-      _heapIndex: 0
+      _: heap._(area(a, b, c))
     };
     a = b;
     b = c;
-    if (!triangle.area) {
+    if (!triangle._.key) {
       continue;
     }
     if (trianglePrev) {
       trianglePrev.next = triangle;
     }
-    list.push(triangle);
+    ts.heap.push(triangle);
     trianglePrev = triangle;
+    if (!ts.first) {
+      ts.first = triangle;
+    }
   }
-
-  ts.first = list[0];
-
-  // create a heap
-  ts.heap.rebuild(list);
 
   return ts;
 }
@@ -69,20 +61,16 @@ function eliminate(ts, limit) {
 
     // recalculate neighbors
     if (prevTriangle) {
-      ts.heap.remove(prevTriangle);
       prevTriangle.next = triangle.next;
       prevTriangle.c = triangle.c;
-      prevTriangle.area = area(prevTriangle.a, prevTriangle.b, prevTriangle.c);
-      ts.heap.push(prevTriangle);
+      ts.heap.update(prevTriangle, area(prevTriangle.a, prevTriangle.b, prevTriangle.c));
     } else {
       ts.first = triangle.next;
     }
     if (nextTriangle) {
-      ts.heap.remove(nextTriangle);
       nextTriangle.prev = triangle.prev;
       nextTriangle.a = triangle.a;
-      nextTriangle.area = area(nextTriangle.a, nextTriangle.b, nextTriangle.c);
-      ts.heap.push(nextTriangle);
+      ts.heap.update(nextTriangle, area(nextTriangle.a, nextTriangle.b, nextTriangle.c));
     }
   }
 }
