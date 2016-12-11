@@ -1,4 +1,9 @@
 
+1.1.4 / 2016-12-10
+==================
+
+ * fix iexception for duplicate and co-linear stops
+
 1.1.3 / 2016-12-08
 ==================
 
