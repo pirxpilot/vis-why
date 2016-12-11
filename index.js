@@ -20,26 +20,28 @@ function calculate(poly) {
     ts = { heap: heap(areaCompare, true) },
     triangle,
     trianglePrev,
+    a = poly[0], b = poly[1], c,
     list = [];
 
   // calculate areas
-  for (i = 1; i < poly.length - 1; i++) {
+  for (i = 2; i < poly.length; i++) {
+    c = poly[i];
     triangle = {
-      a: poly[i - 1],
-      b: poly[i],
-      c: poly[i + 1],
-      area: 0,
+      a: a,
+      b: b,
+      c: c,
+      area: area(a, b, c),
       next: null,
-      prev: null,
+      prev: trianglePrev,
       _heapIndex: 0
     };
-    triangle.area = area(triangle.a, triangle.b, triangle.c);
+    a = b;
+    b = c;
     if (!triangle.area) {
       continue;
     }
     if (trianglePrev) {
       trianglePrev.next = triangle;
-      triangle.prev = trianglePrev;
     }
     list.push(triangle);
     trianglePrev = triangle;
