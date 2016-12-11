@@ -60,7 +60,7 @@ function eliminate(ts, limit) {
     nextTriangle,
     counter = ts.heap.size() - limit;
 
-  while(counter--) {
+  while(counter-- > 0) {
     triangle = ts.heap.pop();
     prevTriangle = triangle.prev;
     nextTriangle = triangle.next;

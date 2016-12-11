@@ -51,6 +51,24 @@ describe('simplify', function() {
     simplify(poly, 3).should.eql([[ -3, -3 ], [ 5, 5 ]]);
   });
 
+  it('should remove duplicate stops', function () {
+    var poly = [
+      [-91.9655,  39.55001],
+      [-91.9655,  39.55001],
+      [-91.96581, 39.55024],
+      [-91.96596, 39.55041],
+      [-91.96599, 39.55053],
+      [-91.96588, 39.55320],
+      [-91.96581, 39.55578],
+      [-91.96573, 39.55764],
+      [-91.96573, 39.55764],
+      [-91.96509, 39.55763]
+    ];
+
+    simplify(poly, 9).should.have.length(7);
+  });
+
+
   it('should simplify longer polyline', function() {
     var poly = require('./fixtures/long.json');
     var simplified = require('./fixtures/simplified-long.json');
