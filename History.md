@@ -1,4 +1,10 @@
 
+1.1.5 / 2016-12-15
+==================
+
+ * use @pirxpilot/matcha instead od matcha
+ * minor adjustment to calculate loop
+
 1.1.4 / 2016-12-10
 ==================
 
