@@ -65,7 +65,16 @@ describe('simplify', function() {
       [-91.96509, 39.55763]
     ];
 
-    simplify(poly, 9).should.have.length(7);
+    simplify(poly, 9).should.eql([
+      [-91.9655,  39.55001],
+      [-91.96581, 39.55024],
+      [-91.96596, 39.55041],
+      [-91.96599, 39.55053],
+      [-91.96588, 39.55320],
+      [-91.96581, 39.55578],
+      [-91.96573, 39.55764],
+      [-91.96509, 39.55763]
+    ]);
   });
 
 
@@ -74,5 +83,10 @@ describe('simplify', function() {
     var simplified = require('./fixtures/simplified-long.json');
 
     simplify(poly, 40).should.eql(simplified);
+  });
+
+  it('should keep the first point', function () {
+     var poly = [[0, 0], [1, 0], [2, 0], [3, 1], [4, 2], [4, 4]];
+     simplify(poly, 4).should.eql([[0, 0], [2, 0], [4, 2], [4, 4]]);
   });
 });
