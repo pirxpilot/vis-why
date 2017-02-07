@@ -2,10 +2,10 @@ var heap = require('code42day-binary-heap');
 
 module.exports = simplify;
 
-function area(a, b, c) {
+function area(a, b, c, opts) {
   return Math.abs(
-    (a[0] - c[0]) * (b[1] - a[1]) -
-    (a[0] - b[0]) * (c[1] - a[1])
+    (a[opts.xAxis] - c[opts.xAxis]) * (b[opts.yAxis] - a[opts.yAxis]) -
+    (a[opts.xAxis] - b[opts.xAxis]) * (c[opts.yAxis] - a[opts.yAxis])
   );
 }
 
@@ -15,7 +15,7 @@ function areaCompare(p, q) {
 }
 
 
-function calculate(poly) {
+function calculate(poly, opts) {
   var i,
     ts = { heap: heap(areaCompare, true) },
     triangle,
@@ -31,7 +31,7 @@ function calculate(poly) {
       a: a,
       b: b,
       c: c,
-      area: area(a, b, c),
+      area: area(a, b, c, opts),
       next: null,
       prev: trianglePrev,
       _heapIndex: 0
@@ -56,7 +56,7 @@ function calculate(poly) {
 }
 
 
-function eliminate(ts, limit) {
+function eliminate(ts, limit, opts) {
   var triangle,
     prevTriangle,
     nextTriangle,
@@ -72,7 +72,7 @@ function eliminate(ts, limit) {
       ts.heap.remove(prevTriangle);
       prevTriangle.next = triangle.next;
       prevTriangle.c = triangle.c;
-      prevTriangle.area = area(prevTriangle.a, prevTriangle.b, prevTriangle.c);
+      prevTriangle.area = area(prevTriangle.a, prevTriangle.b, prevTriangle.c, opts);
       ts.heap.push(prevTriangle);
     } else {
       ts.first = triangle.next;
@@ -81,7 +81,7 @@ function eliminate(ts, limit) {
       ts.heap.remove(nextTriangle);
       nextTriangle.prev = triangle.prev;
       nextTriangle.a = triangle.a;
-      nextTriangle.area = area(nextTriangle.a, nextTriangle.b, nextTriangle.c);
+      nextTriangle.area = area(nextTriangle.a, nextTriangle.b, nextTriangle.c, opts);
       ts.heap.push(nextTriangle);
     }
   }
@@ -105,7 +105,11 @@ function collect(triangle) {
 }
 
 
-function simplify(poly, limit) {
+function simplify(poly, limit, opts) {
+  opts = opts || {};
+  opts.xAxis = typeof opts.xAxis == 'undefined' ? 0 : opts.xAxis;
+  opts.yAxis = typeof opts.yAxis == 'undefined' ? 1 : opts.yAxis;
+
   if (poly.length < 3) {
     return poly;
   }
@@ -119,11 +123,11 @@ function simplify(poly, limit) {
     return poly;
   }
 
-  var ts = calculate(poly);
+  var ts = calculate(poly, opts);
   if (!ts.first) {
     // empty heap - straight line with all triangles empty
     return [poly[0], poly[poly.length - 1]];
   }
-  eliminate(ts, limit - 2); // limit is in points, and we are counting triangles
+  eliminate(ts, limit - 2, opts); // limit is in points, and we are counting triangles
   return collect(ts.first);
 }
