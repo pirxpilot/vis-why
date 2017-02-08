@@ -39,6 +39,13 @@ describe('simplify', function() {
 
   it('should simplify longer polylines using custom properties', function() {
 
+    function area(a, b, c) {
+      return Math.abs(
+        (a.x - c.x) * (b.y - a.y) -
+        (a.x - b.x) * (c.y - a.y)
+      );
+    }
+
     var poly = [
       {x: 0, y: 0, label: 'a'},
       {x: 1, y: 0, label: 'b'},
@@ -52,7 +59,7 @@ describe('simplify', function() {
       {x: 9, y: 9, label: 'j'}
     ];
 
-    simplify(poly, 4, {xAxis: 'x', yAxis: 'y'}).should.eql([
+    simplify(poly, 4, area).should.eql([
       {x: 0, y: 0, label: 'a'},
       {x: 3, y: 3, label: 'e'},
       {x: 8, y: 5, label: 'h'},
