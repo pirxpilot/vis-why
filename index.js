@@ -2,7 +2,7 @@ var heap = require('code42day-binary-heap');
 
 module.exports = simplify;
 
-function area(a, b, c) {
+function areaLL(a, b, c) {
   return Math.abs(
     (a[0] - c[0]) * (b[1] - a[1]) -
     (a[0] - b[0]) * (c[1] - a[1])
@@ -15,7 +15,7 @@ function areaCompare(p, q) {
 }
 
 
-function calculate(poly) {
+function calculate(poly, area) {
   var i,
     ts = { heap: heap(areaCompare, true) },
     triangle,
@@ -56,7 +56,7 @@ function calculate(poly) {
 }
 
 
-function eliminate(ts, limit) {
+function eliminate(ts, limit, area) {
   var triangle,
     prevTriangle,
     nextTriangle,
@@ -105,7 +105,7 @@ function collect(triangle) {
 }
 
 
-function simplify(poly, limit) {
+function simplify(poly, limit, area) {
   if (poly.length < 3) {
     return poly;
   }
@@ -114,16 +114,18 @@ function simplify(poly, limit) {
     return [poly[0], poly[poly.length - 1]];
   }
 
-
   if (poly.length <= limit) {
     return poly;
   }
 
-  var ts = calculate(poly);
+  // default area function
+  area = area || areaLL;
+
+  var ts = calculate(poly, area);
   if (!ts.first) {
     // empty heap - straight line with all triangles empty
     return [poly[0], poly[poly.length - 1]];
   }
-  eliminate(ts, limit - 2); // limit is in points, and we are counting triangles
+  eliminate(ts, limit - 2, area); // limit is in points, and we are counting triangles
   return collect(ts.first);
 }

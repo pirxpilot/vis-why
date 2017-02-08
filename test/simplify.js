@@ -37,6 +37,38 @@ describe('simplify', function() {
   });
 
 
+  it('should simplify longer polylines using custom properties', function() {
+
+    function area(a, b, c) {
+      return Math.abs(
+        (a.x - c.x) * (b.y - a.y) -
+        (a.x - b.x) * (c.y - a.y)
+      );
+    }
+
+    var poly = [
+      {x: 0, y: 0, label: 'a'},
+      {x: 1, y: 0, label: 'b'},
+      {x: 1, y: 1, label: 'c'},
+      {x: 3, y: 1, label: 'd'},
+      {x: 3, y: 3, label: 'e'},
+      {x: 4, y: 4, label: 'f'},
+      {x: 5, y: 4, label: 'g'},
+      {x: 8, y: 5, label: 'h'},
+      {x: 8, y: 7, label: 'i'},
+      {x: 9, y: 9, label: 'j'}
+    ];
+
+    simplify(poly, 4, area).should.eql([
+      {x: 0, y: 0, label: 'a'},
+      {x: 3, y: 3, label: 'e'},
+      {x: 8, y: 5, label: 'h'},
+      {x: 9, y: 9, label: 'j'}
+    ]);
+
+  });
+
+
   it('should keep the ends of the straight line', function() {
 
     var poly = [

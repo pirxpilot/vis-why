@@ -30,6 +30,23 @@ Simplify polyline by [repeated elimination of the smallest][vis-why] area.
 - `limit` - number of points/vortexes that will remain in the resulting polyline
 
 
+### `simplify(polyline, limit, areaFn)`
+
+You can specify a custom `areaFn` if your points are not represented by `[x, y]` pair. For example if you have
+an array of `{x, y}` objects you can use something like this:
+
+```js
+
+function area(a, b, c) {
+  return Math.abs(
+    (a.x - c.x) * (b.y - a.y) - (a.x - b.x) * (c.y - a.y)
+  );
+}
+
+simplify(poly, 4, area);
+
+```
+
 ## License
 
   The MIT License (MIT)
