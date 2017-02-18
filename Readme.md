@@ -11,11 +11,6 @@
 
 ## Installation
 
-  Install with [component(1)]:
-
-    $ component install code42day/vis-why
-
-
   Install with [npm]:
 
     $ npm install vis-why
@@ -54,7 +49,6 @@ simplify(poly, 4, area);
   Copyright (c) 2014 <[code42day]>
 
 [code42day]: http://code42day.com
-[component(1)]: http://component.io
 [npm]: https://www.npmjs.org/
 [vis-why]: https://hydra.hull.ac.uk/resources/hull:8338
 
