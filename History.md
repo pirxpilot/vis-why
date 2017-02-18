@@ -1,4 +1,10 @@
 
+1.2.1 / 2017-02-17
+==================
+
+ * change name to vis-why
+ * remove obsolete component.json
+
 1.2.0 / 2017-02-08
 ==================
 
