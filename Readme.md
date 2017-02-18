@@ -7,7 +7,7 @@
   M Visvalingam and J D Whyatt line simplification algorithm
   Implementation based on [Mike Bostock's code](http://bost.ocks.org/mike/simplify/) but without a d3 dependency.
 
-  Live demo is [here](http://code42day.github.io/vis-why/)
+  Live demo is [here](http://pirxpilot.github.io/vis-why/)
 
 ## Installation
 
@@ -46,17 +46,16 @@ simplify(poly, 4, area);
 
   The MIT License (MIT)
 
-  Copyright (c) 2014 <[code42day]>
+  Copyright (c) 2014
 
-[code42day]: http://code42day.com
 [npm]: https://www.npmjs.org/
 [vis-why]: https://hydra.hull.ac.uk/resources/hull:8338
 
-[npm-image]: https://img.shields.io/npm/v/code42day-vis-why.svg
-[npm-url]: https://npmjs.org/package/code42day-vis-why
+[npm-image]: https://img.shields.io/npm/v/vis-why.svg
+[npm-url]: https://npmjs.org/package/vis-why
 
-[travis-url]: https://travis-ci.org/code42day/vis-why
-[travis-image]: https://img.shields.io/travis/code42day/vis-why.svg
+[travis-url]: https://travis-ci.org/pirxpilot/vis-why
+[travis-image]: https://img.shields.io/travis/pirxpilot/vis-why.svg
 
-[gemnasium-image]: https://img.shields.io/gemnasium/code42day/vis-why.svg
-[gemnasium-url]: https://gemnasium.com/code42day/vis-why
+[gemnasium-image]: https://img.shields.io/gemnasium/pirxpilot/vis-why.svg
+[gemnasium-url]: https://gemnasium.com/pirxpilot/vis-why
