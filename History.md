@@ -1,4 +1,9 @@
 
+1.2.2 / 2017-04-15
+==================
+
+ * update deprecated dependencies
+
 1.2.1 / 2017-02-17
 ==================
 
@@ -24,7 +29,7 @@
 1.1.4 / 2016-12-10
 ==================
 
- * fix iexception for duplicate and co-linear stops
+ * fix exception for duplicate and co-linear stops
 
 1.1.3 / 2016-12-08
 ==================
