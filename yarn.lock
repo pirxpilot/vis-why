@@ -31,10 +31,6 @@ cli@~1.0.0:
     exit "0.1.2"
     glob "^7.1.1"
 
-code42day-binary-heap@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/code42day-binary-heap/-/code42day-binary-heap-2.2.0.tgz#fa55b1e3dcdef8bf9d204d02ba3d6b7eaa46e4df"
-
 commander@2.9.0, commander@~2:
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.9.0.tgz#9c99094176e12240cb22d6c5146098400fe0f7d4"
@@ -345,6 +341,10 @@ should@~11:
     should-type-adaptors "^1.0.1"
     should-util "^1.0.0"
 
+sterta@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/sterta/-/sterta-2.2.1.tgz#0b2530583ea09799c1d5ddd34e565ea38beabf63"
+
 string_decoder@~0.10.x:
   version "0.10.31"
   resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-0.10.31.tgz#62e203bc41766c6c28c9fc84301dab1c5310fa94"
@@ -359,7 +359,7 @@ supports-color@3.1.2:
   dependencies:
     has-flag "^1.0.0"
 
-"v8-argv@github:jkroso/v8-argv":
+v8-argv@jkroso/v8-argv:
   version "1.1.1"
   resolved "https://codeload.github.com/jkroso/v8-argv/tar.gz/284f84379e292eb956a5e7b66fb953ec4974385e"
 

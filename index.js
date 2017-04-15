@@ -1,4 +1,4 @@
-var heap = require('code42day-binary-heap');
+var heap = require('sterta');
 
 module.exports = simplify;
 
