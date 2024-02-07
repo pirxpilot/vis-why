@@ -19,22 +19,22 @@ suite('vis-why', function () {
   // or switch to fixed number of iterations
   // set('iterations', 500);
 
-  before(function() {
+  before(function () {
     this.shortPolyline = require('../test/fixtures/short.json');
     this.longPolyline = require('../test/fixtures/long.json');
   });
 
-  bench('short', function() {
+  bench('short', function () {
     simplify(this.shortPolyline, 5);
   });
 
-  bench('long', function() {
+  bench('long', function () {
     simplify(this.longPolyline, 10);
   });
 
-  [1000, 5000, 10000, 30000].forEach(function(len) {
+  [1000, 5000, 10000, 30000].forEach(function (len) {
     var polyline = usa.slice(-len);
-    bench('huge ' + len, function() {
+    bench('huge ' + len, function () {
       simplify(polyline, len / 100);
     });
   });

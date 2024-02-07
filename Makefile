@@ -1,7 +1,7 @@
 NODE_BIN=./node_modules/.bin
 PROJECT=vis-why
 
-all: check compile
+all: check
 
 check: lint test
 
@@ -9,24 +9,16 @@ lint: node_modules
 	$(NODE_BIN)/jshint index.js test benchmark
 
 test: node_modules
-	$(NODE_BIN)/mocha --require should test
+	node --require should --test
 
-benchmark:
+benchmark: node_modules
 	$(NODE_BIN)/matcha --reporter plain benchmark
 
-compile: build/build.js
-
-build/build.js: node_modules index.js
-	mkdir -p build
-	browserify --require ./index.js:$(PROJECT) --outfile $@
-
 node_modules: package.json
-	npm install && touch $@
+	yarn
+	touch $@
 
-clean:
-	rm -fr build
-
-distclean: clean
+distclean:
 	rm -fr node_modules
 
-.PHONY: clean distclean lint check all compile test benchmark
+.PHONY: clean distclean lint check all test benchmark

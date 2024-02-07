@@ -6,10 +6,7 @@
   "scripts": {
     "test": "make check"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/pirxpilot/vis-why.git"
-  },
+  "repository": "pirxpilot/vis-why",
   "keywords": [
     "line",
     "simplification"
@@ -18,11 +15,10 @@
   "license": "MIT",
   "homepage": "https://github.com/pirxpilot/vis-why",
   "devDependencies": {
+    "@pirxpilot/jshint": "~3",
     "@pirxpilot/matcha": "~1",
-    "jshint": "~2",
-    "mocha": "~3",
     "polyline-encoded": "^0.0.8",
-    "should": "~11"
+    "should": "~13"
   },
   "dependencies": {
     "sterta": "^2.2.1"

@@ -2,6 +2,6 @@
   "undef": true,
   "unused": true,
   "laxbreak": true,
-  "browser": true,
-  "node": true
+  "browserify": true,
+  "esversion": 11
 }
