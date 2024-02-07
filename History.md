@@ -1,4 +1,11 @@
 
+1.2.3 / 2024-02-07
+==================
+
+ * replace mocha with node:test
+ * replace jshint with @pirxpilot/jshint
+ * replace Travis CI with github actions
+
 1.2.2 / 2017-04-15
 ==================
 
