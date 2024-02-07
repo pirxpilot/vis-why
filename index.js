@@ -20,7 +20,8 @@ function calculate(poly, area) {
     ts = { heap: heap(areaCompare, true) },
     triangle,
     trianglePrev,
-    a = poly[0], b, c = poly[1],
+    a = poly[0],
+    b, c = poly[1],
     list = [];
 
   // calculate areas
@@ -62,7 +63,7 @@ function eliminate(ts, limit, area) {
     nextTriangle,
     counter = ts.heap.size() - limit;
 
-  while(counter-- > 0) {
+  while (counter-- > 0) {
     triangle = ts.heap.pop();
     prevTriangle = triangle.prev;
     nextTriangle = triangle.next;
@@ -91,7 +92,7 @@ function eliminate(ts, limit, area) {
 function collect(triangle) {
   var poly = [triangle.a];
 
-  while(true) {
+  while (true) {
     poly.push(triangle.b);
     if (!triangle.next) {
       break;
