@@ -1,6 +1,6 @@
 [![NPM version][npm-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
-[![Dependency Status][gemnasium-image]][gemnasium-url]
+[![Build Status][build-image]][build-url]
+[![Dependency Status][deps-image]][deps-url]
 
 # vis-why
 
@@ -51,11 +51,11 @@ simplify(poly, 4, area);
 [npm]: https://www.npmjs.org/
 [vis-why]: https://hydra.hull.ac.uk/resources/hull:8338
 
-[npm-image]: https://img.shields.io/npm/v/vis-why.svg
+[npm-image]: https://img.shields.io/npm/v/vis-why
 [npm-url]: https://npmjs.org/package/vis-why
 
-[travis-url]: https://travis-ci.org/pirxpilot/vis-why
-[travis-image]: https://img.shields.io/travis/pirxpilot/vis-why.svg
+[build-url]: https://github.com/pirxpilot/vis-why/actions/workflows/check.yaml
+[build-image]: https://img.shields.io/github/actions/workflow/status/pirxpilot/vis-why/check.yaml?branch=main
 
-[gemnasium-image]: https://img.shields.io/gemnasium/pirxpilot/vis-why.svg
-[gemnasium-url]: https://gemnasium.com/pirxpilot/vis-why
+[deps-image]: https://img.shields.io/librariesio/release/npm/vis-why
+[deps-url]: https://libraries.io/npm/vis-why

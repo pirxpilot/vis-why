@@ -6,10 +6,7 @@
   "scripts": {
     "test": "make check"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/pirxpilot/vis-why.git"
-  },
+  "repository": "pirxpilot/vis-why",
   "keywords": [
     "line",
     "simplification"
