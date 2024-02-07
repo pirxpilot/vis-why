@@ -9,7 +9,7 @@ lint: node_modules
 	$(NODE_BIN)/jshint index.js test benchmark
 
 test: node_modules
-	$(NODE_BIN)/mocha --require should test
+	node --require should --test
 
 benchmark: node_modules
 	$(NODE_BIN)/matcha --reporter plain benchmark

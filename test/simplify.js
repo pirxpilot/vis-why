@@ -1,6 +1,5 @@
+var { describe, it } = require('node:test');
 var simplify = require('..');
-
-/* global describe, it */
 
 describe('simplify', function() {
   it('should not change short polylines', function() {
