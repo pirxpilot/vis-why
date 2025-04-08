@@ -3,6 +3,7 @@
   "version": "1.2.3",
   "description": "M Visvalingam and J D Whyatt line simplification algorithm",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "make check"
   },

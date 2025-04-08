@@ -1,5 +1,8 @@
-const { describe, it } = require('node:test');
-const simplify = require('..');
+import { describe, it } from 'node:test';
+import simplify from '../index.js';
+
+import poly from './fixtures/long.json' with { type: 'json' };
+import simplified from './fixtures/simplified-long.json' with { type: 'json' };
 
 describe('simplify', () => {
   it('should not change short polylines', t => {
@@ -145,9 +148,6 @@ describe('simplify', () => {
   });
 
   it('should simplify longer polyline', t => {
-    const poly = require('./fixtures/long.json');
-    const simplified = require('./fixtures/simplified-long.json');
-
     t.assert.deepEqual(simplify(poly, 40), simplified);
   });
 

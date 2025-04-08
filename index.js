@@ -1,6 +1,4 @@
-const heap = require('sterta');
-
-module.exports = simplify;
+import heap from 'sterta';
 
 function areaLL(a, b, c) {
   return Math.abs(
@@ -13,7 +11,6 @@ function areaCompare(p, q) {
 }
 
 function calculate(poly, area) {
-  let i;
   const ts = { heap: heap(areaCompare, true) };
   let triangle;
   let trianglePrev;
@@ -23,7 +20,7 @@ function calculate(poly, area) {
   const list = [];
 
   // calculate areas
-  for (i = 2; i < poly.length; i++) {
+  for (let i = 2; i < poly.length; i++) {
     b = c;
     c = poly[i];
     triangle = {
@@ -101,7 +98,7 @@ function collect(triangle) {
   return poly;
 }
 
-function simplify(poly, limit, area = areaLL) {
+export default function simplify(poly, limit, area = areaLL) {
   if (poly.length < 3) {
     return poly;
   }
