@@ -20,8 +20,8 @@
   "homepage": "https://github.com/pirxpilot/vis-why",
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@pirxpilot/matcha": "~1",
-    "polyline-encoded": "^0.0.8"
+    "@pirxpilot/google-polyline": "^3.0.2",
+    "@pirxpilot/matcha": "~1"
   },
   "dependencies": {
     "sterta": "~3"
