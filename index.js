@@ -1,37 +1,35 @@
-var heap = require('sterta');
+const heap = require('sterta');
 
 module.exports = simplify;
 
 function areaLL(a, b, c) {
   return Math.abs(
-    (a[0] - c[0]) * (b[1] - a[1]) -
-    (a[0] - b[0]) * (c[1] - a[1])
+    (a[0] - c[0]) * (b[1] - a[1]) - (a[0] - b[0]) * (c[1] - a[1])
   );
 }
-
 
 function areaCompare(p, q) {
   return p.area - q.area;
 }
 
-
 function calculate(poly, area) {
-  var i,
-    ts = { heap: heap(areaCompare, true) },
-    triangle,
-    trianglePrev,
-    a = poly[0],
-    b, c = poly[1],
-    list = [];
+  let i;
+  const ts = { heap: heap(areaCompare, true) };
+  let triangle;
+  let trianglePrev;
+  let a = poly[0];
+  let b;
+  let c = poly[1];
+  const list = [];
 
   // calculate areas
   for (i = 2; i < poly.length; i++) {
     b = c;
     c = poly[i];
     triangle = {
-      a: a,
-      b: b,
-      c: c,
+      a,
+      b,
+      c,
       area: area(a, b, c),
       next: null,
       prev: trianglePrev,
@@ -56,12 +54,11 @@ function calculate(poly, area) {
   return ts;
 }
 
-
 function eliminate(ts, limit, area) {
-  var triangle,
-    prevTriangle,
-    nextTriangle,
-    counter = ts.heap.size() - limit;
+  let triangle;
+  let prevTriangle;
+  let nextTriangle;
+  let counter = ts.heap.size() - limit;
 
   while (counter-- > 0) {
     triangle = ts.heap.pop();
@@ -88,9 +85,8 @@ function eliminate(ts, limit, area) {
   }
 }
 
-
 function collect(triangle) {
-  var poly = [triangle.a];
+  const poly = [triangle.a];
 
   while (true) {
     poly.push(triangle.b);
@@ -105,8 +101,7 @@ function collect(triangle) {
   return poly;
 }
 
-
-function simplify(poly, limit, area) {
+function simplify(poly, limit, area = areaLL) {
   if (poly.length < 3) {
     return poly;
   }
@@ -119,10 +114,7 @@ function simplify(poly, limit, area) {
     return poly;
   }
 
-  // default area function
-  area = area || areaLL;
-
-  var ts = calculate(poly, area);
+  const ts = calculate(poly, area);
   if (!ts.first) {
     // empty heap - straight line with all triangles empty
     return [poly[0], poly[poly.length - 1]];
