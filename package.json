@@ -24,7 +24,7 @@
     "polyline-encoded": "^0.0.8"
   },
   "dependencies": {
-    "sterta": "^2.2.1"
+    "sterta": "~3"
   },
   "files": [
     "index.js"
