@@ -3,10 +3,14 @@
   "version": "1.2.3",
   "description": "M Visvalingam and J D Whyatt line simplification algorithm",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "make check"
   },
-  "repository": "pirxpilot/vis-why",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pirxpilot/vis-why.git"
+  },
   "keywords": [
     "line",
     "simplification"
@@ -15,13 +19,12 @@
   "license": "MIT",
   "homepage": "https://github.com/pirxpilot/vis-why",
   "devDependencies": {
-    "@pirxpilot/jshint": "~3",
-    "@pirxpilot/matcha": "~1",
-    "polyline-encoded": "^0.0.8",
-    "should": "~13"
+    "@biomejs/biome": "^1.9.4",
+    "@pirxpilot/google-polyline": "^3.0.2",
+    "@pirxpilot/matcha": "~1"
   },
   "dependencies": {
-    "sterta": "^2.2.1"
+    "sterta": "~3"
   },
   "files": [
     "index.js"
