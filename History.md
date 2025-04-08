@@ -1,4 +1,12 @@
 
+2.0.0 / 2025-04-08
+==================
+
+ * use `@pirxpilot/google-polyline` instead of `polyline-encoded`
+ * upgrade sterta to ~3
+ * transition to ESM
+ * use `biome` instead of `jshint`
+
 1.2.3 / 2024-02-07
 ==================
 
