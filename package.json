@@ -20,7 +20,7 @@
   "homepage": "https://github.com/pirxpilot/vis-why",
   "devDependencies": {
     "@biomejs/biome": "2.4.3",
-    "@pirxpilot/google-polyline": "^3.0.2",
+    "@pirxpilot/google-polyline": "~4",
     "@pirxpilot/matcha": "~1"
   },
   "dependencies": {

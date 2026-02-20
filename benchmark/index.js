@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import polyline from '@pirxpilot/google-polyline';
+import { decode } from '@pirxpilot/google-polyline';
 import simplify from '../index.js';
 
 import LONG_POLY from '../test/fixtures/long.json' with { type: 'json' };
@@ -10,7 +10,7 @@ import SHORT_POLY from '../test/fixtures/short.json' with { type: 'json' };
 function readPolyline(filename) {
   const path = [import.meta.dirname, '../test/fixtures', filename].join('/');
   const txt = fs.readFileSync(path, 'utf8');
-  return polyline.decode(txt);
+  return decode(txt);
 }
 
 const usa = readPolyline('usa.txt');
