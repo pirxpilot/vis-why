@@ -1,18 +1,24 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-  "organizeImports": {
-    "enabled": true
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
   },
   "vcs": {
+    "enabled": true,
+    "clientKind": "git",
     "useIgnoreFile": true
   },
   "files": {
-    "ignoreUnknown": true,
-    "ignore": ["package.json"]
+    "ignoreUnknown": true
   },
   "formatter": {
     "enabled": true,
-    "useEditorconfig": true
+    "useEditorconfig": true,
+    "lineWidth": 120
   },
   "javascript": {
     "formatter": {
@@ -21,28 +27,56 @@
       "arrowParentheses": "asNeeded"
     }
   },
+  "json": {
+    "formatter": {
+      "expand": "always"
+    }
+  },
   "linter": {
     "enabled": true,
+    "domains": {
+      "project": "recommended"
+    },
     "rules": {
       "recommended": true,
       "correctness": {
+        "noUndeclaredDependencies": "error",
         "noUndeclaredVariables": "error",
-        "noUnusedVariables": "error"
+        "noUnusedVariables": "error",
+        "useImportExtensions": "error",
+        "useJsonImportAttributes": "error"
       },
       "complexity": {
-        "noForEach": "off",
-        "useArrowFunction": "off"
+        "noForEach": "off"
       },
       "style": {
-        "noParameterAssign": "off"
+        "noUnusedTemplateLiteral": "error",
+        "noUselessElse": "error",
+        "useBlockStatements": "error",
+        "useDefaultParameterLast": "error",
+        "useNumberNamespace": "error",
+        "useSingleVarDeclarator": "error"
+      },
+      "performance": {
+        "noDelete": "off"
+      },
+      "suspicious": {
+        "noAssignInExpressions": "off"
       }
     }
   },
   "overrides": [
     {
-      "include": ["benchmark"],
+      "includes": [
+        "benchmark/**/*.js"
+      ],
       "javascript": {
-        "globals": ["before", "set", "suite", "bench"]
+        "globals": [
+          "before",
+          "set",
+          "suite",
+          "bench"
+        ]
       }
     }
   ]

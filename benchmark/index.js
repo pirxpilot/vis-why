@@ -15,24 +15,24 @@ function readPolyline(filename) {
 
 const usa = readPolyline('usa.txt');
 
-suite('vis-why', function () {
+suite('vis-why', () => {
   // run each bench for at least 2s
   set('type', 'adaptive');
   set('mintime', 2000);
   // or switch to fixed number of iterations
   // set('iterations', 500);
 
-  bench('short', function () {
+  bench('short', () => {
     simplify(SHORT_POLY, 5);
   });
 
-  bench('long', function () {
+  bench('long', () => {
     simplify(LONG_POLY, 10);
   });
 
-  [1000, 5000, 10000, 30000].forEach(function (len) {
+  [1000, 5000, 10000, 30000].forEach(len => {
     const polyline = usa.slice(-len);
-    bench(`huge ${len}`, function () {
+    bench(`huge ${len}`, () => {
       simplify(polyline, len / 100);
     });
   });
