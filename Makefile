@@ -1,27 +1,20 @@
-NODE_BIN=./node_modules/.bin
-PROJECT=vis-why
-
-all: check
-
 check: lint test
 
-lint: node_modules
-	$(NODE_BIN)/biome ci
+lint:
+	./node_modules/.bin/biome ci
 
-format: node_modules
-	$(NODE_BIN)/biome check --fix
+format:
+	./node_modules/.bin/biome check --fix
 
-test: node_modules
-	node --test
+test:
+	node --test $(TEST_OPTS)
+
+test-cov: TEST_OPTS := --experimental-test-coverage
+test-cov: test
+
+.PHONY: check format lint test test-cov
 
 benchmark: node_modules
-	$(NODE_BIN)/matcha --reporter plain benchmark
+	./node_modules/.bin/matcha --reporter plain benchmark
 
-node_modules: package.json
-	yarn
-	touch $@
-
-distclean:
-	rm -fr node_modules
-
-.PHONY: clean distclean lint check all test benchmark
+.PHONY: benchmark
