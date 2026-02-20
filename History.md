@@ -1,4 +1,10 @@
 
+2.0.1 / 2026-02-20
+==================
+
+ * upgrade `@pirxpilot/google-polyline` to ~4
+ * upgrade `biome` to 2.4.3
+
 2.0.0 / 2025-04-08
 ==================
 
